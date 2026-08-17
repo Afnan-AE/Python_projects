@@ -1,7 +1,5 @@
-from os import system
-from time import sleep
+t1,t2,t3 = 'O','O','O'
 
-print("Hello")
-sleep(5)
-system('clear')
-print("Bye")
+if (t1 == t2 == t3) == ' ':
+    print("NO")
+else : print("YES")
