@@ -1,4 +1,5 @@
 import random
+from os import system
 
 table_3x3 = [[' ',' ',' '],
                               [' ',' ',' '],
@@ -23,27 +24,38 @@ def random_choicer():
     return random_row, random_colm
 
 
-print_table(table_3x3)
+def main_play():
+    
+    print_table(table_3x3)
 
-
-my_choice = [None, None]
-my_choice[0] = int(input("Enter row: "))
-my_choice[1] = int(input("Enter coloumn: "))
-while(table_3x3[my_choice[0]-1][my_choice[1]-1] != ' '):
-    print("THIS SPACE IS TAKEN !! ", end='\n')
+    my_choice = [None, None]
     my_choice[0] = int(input("Enter row: "))
     my_choice[1] = int(input("Enter coloumn: "))
+    while(table_3x3[my_choice[0]-1][my_choice[1]-1] != ' '):
+        print("THIS SPACE IS TAKEN !! ", end='\n')
+        my_choice[0] = int(input("Enter row: "))
+        my_choice[1] = int(input("Enter coloumn: "))
 
-print("",end="\n")
+    print("",end="\n")
 
-table_3x3[my_choice[0]-1][my_choice[1]-1] = 'O'
+    table_3x3[my_choice[0]-1][my_choice[1]-1] = 'O'
 
-#loop for bot to not choose the taken square
-choice_row_bot,choice_colm_bot = random_choicer()
-while(table_3x3[choice_row_bot][choice_colm_bot] != ' '):
+    #loop for bot to not choose the taken square
     choice_row_bot,choice_colm_bot = random_choicer()
+    if_try = 0
+    while(table_3x3[choice_row_bot][choice_colm_bot] != ' '):
+        if if_try == 9: break
+        choice_row_bot,choice_colm_bot = random_choicer()
+        if_try += 1
 
-table_3x3[choice_row_bot][choice_colm_bot] = 'X'
+    table_3x3[choice_row_bot][choice_colm_bot] = 'X'
 
+    system('clear')
 
-print_table(table_3x3)
+def play_game():
+    t = 1
+    while(t!=6):
+        main_play()
+        t+=1
+    print_table(table_3x3)
+play_game()
