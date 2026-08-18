@@ -26,18 +26,18 @@ def random_choicer():
 #the function for row and diagonal matching
 def matcher(t):
     
-    def sub_matcher(space):
-        if space == ' ' : return True
+    def sub_matcher(space_is):
+        if space_is == ' ' : return True
         else : return False
 
-    if t[0][0] == t[1][1] == t[2][2] : sub_matcher(t[0][0])
-    elif t[0][2] == t[1][1] == t[2][0] : sub_matcher(t[0][2])
-    elif t[0][0] == t[0][1] == t[0][2] : sub_matcher(t[0][0])
-    elif t[1][0] == t[1][1] == t[1][2] : sub_matcher(t[1][0])
-    elif t[2][0] == t[2][1] == t[2][2] : sub_matcher(t[2][0])
-    elif t[0][0] == t[1][0] == t[2][0] : sub_matcher(t[0][0])
-    elif t[0][1] == t[1][1] == t[2][1] : sub_matcher(t[0][1])
-    elif t[0][2] == t[1][2] == t[2][2] : sub_matcher(t[0][2])
+    if t[0][0] == t[1][1] == t[2][2] : return sub_matcher(t[0][0])
+    elif t[0][2] == t[1][1] == t[2][0] : return sub_matcher(t[0][2])
+    elif t[0][0] == t[0][1] == t[0][2] : return sub_matcher(t[0][0])
+    elif t[1][0] == t[1][1] == t[1][2] : return sub_matcher(t[1][0])
+    elif t[2][0] == t[2][1] == t[2][2] : return sub_matcher(t[2][0])
+    elif t[0][0] == t[1][0] == t[2][0] : return sub_matcher(t[0][0])
+    elif t[0][1] == t[1][1] == t[2][1] : return sub_matcher(t[0][1])
+    elif t[0][2] == t[1][2] == t[2][2] : return sub_matcher(t[0][2])
     else : return True
 
 #Main base game
@@ -71,9 +71,10 @@ def main_play():
 
     system('clear')
 
-    while(matcher(table_3x3) and try_instance!=6):
-        main_play()
-        t+=1
+    
+    while(matcher(table_3x3) and try_instance != 6):
+        main_play(); try_instance += 1
+
 
 
 main_play()

@@ -1,5 +1,9 @@
-t1,t2,t3 = 'O','O','O'
+t1,t2,t3 = ' ',' ',' '
 
-if (t1 == t2 == t3) == ' ':
-    print("NO")
-else : print("YES")
+if (t1 == t2 == t3):
+    if t1 == ' ' : print("No")
+    else : print("YES")
+else : print("No")
+
+
+while(True):print(False)
