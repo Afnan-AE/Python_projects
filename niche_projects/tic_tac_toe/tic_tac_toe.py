@@ -1,4 +1,5 @@
 import random
+import path_matcher
 from os import system
 
 table_3x3 = [[' ',' ',' '],
@@ -17,6 +18,20 @@ def print_table(table):
     print("",end='\n\n')
 
 
+# for checking empty squares
+
+def blank_checker(t):
+    blanks = 0
+    for i in [0,1,2]:
+        for j in [0,1,2]:
+            if t[i][j] == ' ': blanks+=1
+            else : pass
+    
+    if blanks > 0 : return True
+    else : return False
+
+
+
 #function for bot to choice
 def random_choicer():
     random_row = random.randint(0,2)
@@ -28,7 +43,9 @@ def matcher(t):
     
     def sub_matcher(space_is):
         if space_is == ' ' : return True
-        else : return False
+        else : 
+            print("Game over", end='\n')
+            return False
 
     if t[0][0] == t[1][1] == t[2][2] : return sub_matcher(t[0][0])
     elif t[0][2] == t[1][1] == t[2][0] : return sub_matcher(t[0][2])
@@ -41,9 +58,9 @@ def matcher(t):
     else : return True
 
 #Main base game
+
 def main_play():
     
-    try_instance = 1
 
     print_table(table_3x3)
 
@@ -60,20 +77,13 @@ def main_play():
     table_3x3[my_choice[0]-1][my_choice[1]-1] = 'O'
 
     #loop for bot to not choose the taken square
-    choice_row_bot,choice_colm_bot = random_choicer()
-    if_try = 0
-    while(table_3x3[choice_row_bot][choice_colm_bot] != ' '):
-        if if_try == 9: break
-        choice_row_bot,choice_colm_bot = random_choicer()
-        if_try += 1
+    choice_row_bot, choice_colm_bot = path_matcher.path_finder(table_3x3, (my_choice[0]-1), (my_choice[1]-1))
 
     table_3x3[choice_row_bot][choice_colm_bot] = 'X'
 
-    system('clear')
-
     
-    while(matcher(table_3x3) and try_instance != 6):
-        main_play(); try_instance += 1
+    if(matcher(table_3x3) and blank_checker(table_3x3)):
+        main_play()
 
 
 

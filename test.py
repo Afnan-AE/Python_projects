@@ -1,9 +1,15 @@
-t1,t2,t3 = ' ',' ',' '
+class ar:
+    color = "BLUE" #class variable
+    def __init__(self, model, year, port):
+        self.m = model #instance variable
+        self.y = year #instance variable
+        self.p = port #instance variable
 
-if (t1 == t2 == t3):
-    if t1 == ' ' : print("No")
-    else : print("YES")
-else : print("No")
+    def walk(self):
+        print(f"This {self.m} arduino is walking.")
 
+    def ve(self):
+        print(f"This {self.m} arduino is verified.")
 
-while(True):print(False)
+a1 = ar("UNO R3", "2023", 1)
+print(a1.m)
