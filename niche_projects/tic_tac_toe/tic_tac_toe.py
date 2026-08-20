@@ -32,20 +32,12 @@ def blank_checker(t):
 
 
 
-#function for bot to choice
-def random_choicer():
-    random_row = random.randint(0,2)
-    random_colm = random.randint(0,2)
-    return random_row, random_colm
-
 #the function for row and diagonal matching
 def matcher(t):
     
     def sub_matcher(space_is):
         if space_is == ' ' : return True
-        else : 
-            print("Game over", end='\n')
-            return False
+        else : return False
 
     if t[0][0] == t[1][1] == t[2][2] : return sub_matcher(t[0][0])
     elif t[0][2] == t[1][1] == t[2][0] : return sub_matcher(t[0][2])
@@ -69,6 +61,7 @@ def main_play():
     my_choice[1] = int(input("Enter coloumn: "))
     while(table_3x3[my_choice[0]-1][my_choice[1]-1] != ' '):
         print("THIS SPACE IS TAKEN !! ", end='\n')
+
         my_choice[0] = int(input("Enter row: "))
         my_choice[1] = int(input("Enter coloumn: "))
 
@@ -76,16 +69,33 @@ def main_play():
 
     table_3x3[my_choice[0]-1][my_choice[1]-1] = 'O'
 
-    #loop for bot to not choose the taken square
-    choice_row_bot, choice_colm_bot = path_matcher.path_finder(table_3x3, (my_choice[0]-1), (my_choice[1]-1))
+    #BOT FUNC
+    if(blank_checker(table_3x3)):
+        choice_row_bot, choice_colm_bot = path_matcher.path_finder(table_3x3, (my_choice[0]-1), (my_choice[1]-1))
+        table_3x3[choice_row_bot][choice_colm_bot] = 'X'
 
-    table_3x3[choice_row_bot][choice_colm_bot] = 'X'
+    system('clear')
 
-    
     if(matcher(table_3x3) and blank_checker(table_3x3)):
         main_play()
 
 
+def play_game():
+    
+    main_play()
+    print_table(table_3x3)
 
-main_play()
-print_table(table_3x3)
+
+    answer = input("Do you want to play again? [y/n]: ")
+
+    answer = answer.lower()
+
+    if answer == 'y':
+        for i in [0,1,2]:
+            for j in [0,1,2]: 
+                table_3x3[i][j] = ' '
+        play_game()
+
+    else : print("Have a great day", end='\n')
+
+play_game()
