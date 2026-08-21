@@ -6,6 +6,14 @@ table_3x3 = [[' ',' ',' '],
                               [' ',' ',' '],
                               [' ',' ',' ']]
 
+#asci logo
+def print_logo():
+    print(r"████████ ██  ██████     ████████  █████   ██████     ████████  ██████  ███████ ")
+    print(r"   ██    ██ ██             ██    ██   ██ ██             ██    ██    ██ ██      ")
+    print(r"   ██    ██ ██             ██    ███████ ██             ██    ██    ██ █████   ")
+    print(r"   ██    ██ ██             ██    ██   ██ ██             ██    ██    ██ ██      ")
+    print(r"   ██    ██  ██████        ██    ██   ██  ██████        ██     ██████  ███████ ")
+    pass
 
 #function to print the table in each try instance
 def print_table(table):
@@ -53,7 +61,7 @@ def matcher(t):
 
 def main_play():
     
-
+    print_logo()
     print_table(table_3x3)
 
     my_choice = [None, None]
@@ -82,8 +90,19 @@ def main_play():
 
 def play_game():
     
-    main_play()
-    print_table(table_3x3)
+    print_logo()
+    print("",end='\n\n')
+    answer_1 = input("Do you want to start? [y/n]: ")
+    answer_1 = answer_1.lower()
+    if answer_1 == 'y':
+        system('clear')
+        main_play()
+        print_logo()
+        print_table(table_3x3)
+    else : print("Have a great day", end='\n')
+
+
+    
 
 
     answer = input("Do you want to play again? [y/n]: ")
