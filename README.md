@@ -3,4 +3,6 @@
 
 These are begineer projects through which i am tryin' to be better
 
-##Tic_Tac_Toe ✅
+The test.py file is just for tinkering out stuff in python. I don't know how to hide cause I didn't learn gitignore
+
+## Tic_Tac_Toe ✅
