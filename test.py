@@ -1,15 +1,16 @@
-class ar:
-    color = "BLUE" #class variable
-    def __init__(self, model, year, port):
-        self.m = model #instance variable
-        self.y = year #instance variable
-        self.p = port #instance variable
+class winner:
+    def __init__(self):
+        self.lock_state = None
 
-    def walk(self):
-        print(f"This {self.m} arduino is walking.")
+    def winer(self):
+        if self.lock_state == 'O' : print('YOU ARE THE WINNEEEER')
+        elif self.lock_state == 'X' : print('The bot won....')
+        elif self.lock_state == None : print('It was a tie')
 
-    def ve(self):
-        print(f"This {self.m} arduino is verified.")
+w1 = winner()
+w1.lock_state = 'O'
 
-a1 = ar("UNO R3", "2023", 1)
-print(a1.m)
+print(w1.lock_state)
+w1.winer()
+
+

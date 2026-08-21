@@ -8,6 +8,7 @@ table_3x3 = [[' ',' ',' '],
 
 #asci logo
 def print_logo():
+    print('',end='\n\n')
     print(r"████████ ██  ██████     ████████  █████   ██████     ████████  ██████  ███████ ")
     print(r"   ██    ██ ██             ██    ██   ██ ██             ██    ██    ██ ██      ")
     print(r"   ██    ██ ██             ██    ███████ ██             ██    ██    ██ █████   ")
@@ -43,15 +44,27 @@ def blank_checker(t):
 def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
+#class/obj for saving winner
+class winner:
+    def __init__(self):
+        self.lock_state = None
+
+    def the_winner(self):
+        if self.lock_state == 'O' : print('YOU ARE THE WINNEEEER')
+        elif self.lock_state == 'X' : print('The bot won....')
+        elif self.lock_state == None : print('It was a tie')
+        
+
+w1 = winner()
 
 #the function for row and diagonal matching
 def matcher(t):
-    
 
 
     def sub_matcher(space_is):
         if space_is == ' ' : return True
         else :
+            w1.lock_state = space_is
             return False
 
     if t[0][0] == t[1][1] == t[2][2] : return sub_matcher(t[0][0])
@@ -123,6 +136,9 @@ def play_game():
         main_play()
         print_logo()
         print_table(table_3x3)
+        print('',end='\n')
+        w1.the_winner()
+        print('', end='\n\n\n')
 
         answer = input("Do you want to play again? [y/n]: ")
         answer = answer.lower()
@@ -134,6 +150,7 @@ def play_game():
             for i in [0,1,2]:
                 for j in [0,1,2]: 
                     table_3x3[i][j] = ' '
+            w1.lock_state = None
             clear_screen()
             play_game()
 
