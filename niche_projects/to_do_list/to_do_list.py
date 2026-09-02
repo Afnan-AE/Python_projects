@@ -12,10 +12,11 @@ def task_viewer():
         data = json.load(f)
     size_ = len(data['tasks'])
     
-    if size_ == 0: print("There are no tasks add some!\n")
+    if size_ == 0: print("There are no tasks add some!",end="\n")
     else:
         for i in range(size_):
-            print(f"|{i+1}|- {data['tasks'][str(i+1)]} -|{i+1}|")
+            print(f"<{i+1}> [{data['tasks'][str(i+1)]}] ")
+    print()
 
 # func to print the logo
 def print_logo():
@@ -70,7 +71,8 @@ def deleter_task():
     s = str(len(data['tasks']))
     print("",end="\n")
     i = input('Which task have you completed?: ')
-    if i == "all":
+    l_i = i.lower()
+    if  l_i == "all":
         t=int(s)
         while(t):
             del_last_task()
@@ -95,11 +97,14 @@ def main_func():
         nt = len(data['tasks'])
         
         if lock_key : clear_screen()
-
+        if lock_keyy : clear_screen()
+        if lock_keyx: clear_screen()
         
         print_logo()
         print('Print Todo list [1]     Add task [2]      Complete task [3/all]    Quit [q]\n')
 
+        if lock_keyy:
+            print('There are no tasks left to be completed :(\n')
 
         if lock_key : 
             print()
@@ -111,16 +116,15 @@ def main_func():
             if nt: 
                 print()
                 task_viewer()
-            if nt == 0:
-                print('There are no tasks to complete :(\n')
+            if nt == 0: lock_keyy = True
             else:
                 deleter_task()
                 clear_screen()
             lock_keyx = False
-        if not lock_keyx:
-            ans = input("What do you want to?: ")
+        else:
+            ans = input("What do you want to do?: ")
             while(len(ans) != 1) or ((ans<"1" or ans>"4") and (ans<"q" or ans > "q")):
-                ans = input("What do you want to?: ")
+                ans = input("What do you want to do?: ")
                     
             if ans == "1":lock_key = True
             elif ans == "2":
@@ -133,8 +137,9 @@ def main_func():
                 print()
                 print("Come by again <3")
                 print()
-                sleep(4)
+                sleep(3)
                 clear_screen()
 
 # yay program running
+clear_screen()
 main_func()
