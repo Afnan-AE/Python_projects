@@ -7,4 +7,4 @@ The test.py file is just for tinkering out stuff in python. I don't know how to 
 
 #### PROJECTS ⬇️
 ###### Tic_Tac_Toe ✅
-###### NO BS TODO LIST
+###### No BS todo-list ✅ ( to run the file you need to download the memory.json file too )
