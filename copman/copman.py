@@ -2,26 +2,45 @@
 
 # a terminal py game completly hard coded by me
 
-from os import system
+import os
+import sys
 
+if os.name == 'nt':
+    import msvcrt
+    def get_char():
+        return msvcrt.getch().decode('utf-8', errors='ignore')
+else:
+    import termios
+    import tty
+    def get_char():
+        fd = sys.stdin.fileno()
+        old = termios.tcgetattr(fd)
+        try:
+            tty.setcbreak(fd)
+            return sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old)
 
 map = ['.','.','.','.','.','.','.']
 size = len(map)
-plac = int(size/2)
-
+place = int(size/2)
+map[place] = '@'
 play_state = True
-while(play_state):
-    for i in range(size) : print(map[i], end='')
-    print()
-    map[plac] = '@'
-    ipt = input()
-    if ipt == 'a' :
-        map[plac-1] = '@'
-        map[plac] = '.'
-    elif ipt == 'd':
-        map[plac+1] = '@'
-        map[plac] = '.'
-    else : pass
-    system('clear')
 
-#idkkk
+os.system('clear')
+while(play_state):
+    for i in range(size) : print(map[i], end=' ')
+    print()
+    usr = get_char()
+    if usr == 'a':
+        map[place - 1] = '@'
+        map[place] = '.'
+        place -= 1
+    elif usr == 'd':
+        map[place + 1] = '@'
+        map[place] = '.'
+        place += 1
+    elif usr == 'q': break
+    os.system('clear')
+
+
